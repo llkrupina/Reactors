@@ -34,6 +34,9 @@ public class GUI extends JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON, XML, YAML Files", "json", "xml", "yaml");
         fileChooser.setFileFilter(filter);
 
+        String currentDirectory = System.getProperty("user.dir");
+        fileChooser.setCurrentDirectory(new File(currentDirectory));
+
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
