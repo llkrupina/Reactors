@@ -10,12 +10,15 @@ import java.util.Map;
 public class GUI extends JFrame {
     private JButton fileChooserButton;
     private JTree reactorTree;
+    private final Manager manager;
 
     public GUI() {
         setTitle("File Chooser");
         setSize(300, 400); // Увеличил высоту, чтобы вместить дерево
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        manager = new Manager();
 
         fileChooserButton = new JButton("Choose File");
         fileChooserButton.addActionListener(e -> chooseFile());
@@ -40,40 +43,34 @@ public class GUI extends JFrame {
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-
-            ReactorStorage reactorStorage = new ReactorStorage();
-
-            JSONReader jsonReader = new JSONReader();
-            XMLReader xmlReader = new XMLReader();
-            YAMLReader yamlReader = new YAMLReader();
-
-            jsonReader.setNextReader(xmlReader);
-            xmlReader.setNextReader(yamlReader);
-
-            jsonReader.readFile(selectedFile.getAbsolutePath(), reactorStorage);
-
-            Map<String, Reactor> reactorMap = reactorStorage.getReactorMap();
-
-            DefaultMutableTreeNode rootNode = null;
-            if (!reactorMap.isEmpty()) {
-                String source = reactorMap.values().iterator().next().getSource();
-                rootNode = new DefaultMutableTreeNode("Reactors from " + source);
-            } else {
-                // Если коллекция пуста, создайте пустой корневой узел
-                rootNode = new DefaultMutableTreeNode("No reactors found");
-            }
-            for (Reactor reactor : reactorMap.values()) {
-                DefaultMutableTreeNode reactorNode = new DefaultMutableTreeNode(reactor.getType());
-                reactorNode.add(new DefaultMutableTreeNode("Burnup: " + reactor.getBurnup()));
-                reactorNode.add(new DefaultMutableTreeNode("KPD: " + reactor.getKpd()));
-                reactorNode.add(new DefaultMutableTreeNode("Enrichment: " + reactor.getEnrichment()));
-                reactorNode.add(new DefaultMutableTreeNode("Thermal Capacity: " + reactor.getThermal_capacity()));
-                reactorNode.add(new DefaultMutableTreeNode("Electrical Capacity: " + reactor.getElectrical_capacity()));
-                reactorNode.add(new DefaultMutableTreeNode("Life Time: " + reactor.getLife_time()));
-                reactorNode.add(new DefaultMutableTreeNode("First Load: " + reactor.getFirst_load()));
-                rootNode.add(reactorNode);
-            }
-            reactorTree.setModel(new javax.swing.tree.DefaultTreeModel(rootNode));
+            manager.readFile(selectedFile);
+            updateTree();
         }
+    }
+
+    private void updateTree() {
+        Map<String, Reactor> reactorMap = manager.getReactorMap();
+
+        DefaultMutableTreeNode rootNode = null;
+        if (!reactorMap.isEmpty()) {
+            String source = reactorMap.values().iterator().next().getSource();
+            rootNode = new DefaultMutableTreeNode("Reactors from " + source);
+        } else {
+            rootNode = new DefaultMutableTreeNode("No reactors found");
+        }
+
+        for (Reactor reactor : reactorMap.values()) {
+            DefaultMutableTreeNode reactorNode = new DefaultMutableTreeNode(reactor.getType());
+            reactorNode.add(new DefaultMutableTreeNode("Burnup: " + reactor.getBurnup()));
+            reactorNode.add(new DefaultMutableTreeNode("KPD: " + reactor.getKpd()));
+            reactorNode.add(new DefaultMutableTreeNode("Enrichment: " + reactor.getEnrichment()));
+            reactorNode.add(new DefaultMutableTreeNode("Thermal Capacity: " + reactor.getThermal_capacity()));
+            reactorNode.add(new DefaultMutableTreeNode("Electrical Capacity: " + reactor.getElectrical_capacity()));
+            reactorNode.add(new DefaultMutableTreeNode("Life Time: " + reactor.getLife_time()));
+            reactorNode.add(new DefaultMutableTreeNode("First Load: " + reactor.getFirst_load()));
+            rootNode.add(reactorNode);
+        }
+
+        reactorTree.setModel(new javax.swing.tree.DefaultTreeModel(rootNode));
     }
 }
