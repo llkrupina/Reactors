@@ -5,14 +5,12 @@ import java.util.Map;
 
     public class Manager {
         private final JSONReader jsonReader;
-        private final XMLReader xmlReader;
-        private final YAMLReader yamlReader;
         private final ReactorStorage reactorStorage;
 
         public Manager() {
             jsonReader = new JSONReader();
-            xmlReader = new XMLReader();
-            yamlReader = new YAMLReader();
+            XMLReader xmlReader = new XMLReader();
+            YAMLReader  yamlReader = new YAMLReader();
 
             jsonReader.setNextReader(xmlReader);
             xmlReader.setNextReader(yamlReader);

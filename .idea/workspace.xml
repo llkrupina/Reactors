@@ -11,11 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9e62729a-f7ed-454e-a5a0-cabf62b3dd2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/FileReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JSONReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/JSONReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/XMLReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/XMLReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/YAMLReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/YAMLReader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714383722714</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="five">
+      <option name="closed" value="true" />
+      <created>1714633363175</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714633363175</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -111,7 +116,8 @@
     <MESSAGE value="second" />
     <MESSAGE value="third" />
     <MESSAGE value="four" />
-    <option name="LAST_COMMIT_MESSAGE" value="four" />
+    <MESSAGE value="five" />
+    <option name="LAST_COMMIT_MESSAGE" value="five" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

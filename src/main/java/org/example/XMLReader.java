@@ -12,6 +12,7 @@ public class XMLReader  extends org.example.FileReader{
         return filePath.endsWith(".xml");
     }
 
+
     @Override
     public void readFile(String filePath, ReactorStorage reactorStorage) {
         try {
@@ -34,18 +35,20 @@ public class XMLReader  extends org.example.FileReader{
                     Double kpd = Double.parseDouble(element.getElementsByTagName("kpd").item(0).getTextContent());
                     Double enrichment = Double.parseDouble(element.getElementsByTagName("enrichment").item(0).getTextContent());
                     Double thermalCapacity = Double.parseDouble(element.getElementsByTagName("termal_capacity").item(0).getTextContent());
-                    Double electricalCapacity = Double.parseDouble(element.getElementsByTagName("electrical_capacity").item(0).getTextContent());
-                    Integer lifeTime = Integer.parseInt(element.getElementsByTagName("life_time").item(0).getTextContent());
-                    Double firstLoad = Double.parseDouble(element.getElementsByTagName("first_load").item(0).getTextContent());
+                        Double electricalCapacity = Double.parseDouble(element.getElementsByTagName("electrical_capacity").item(0).getTextContent());
+                        Integer lifeTime = Integer.parseInt(element.getElementsByTagName("life_time").item(0).getTextContent());
+                        Double firstLoad = Double.parseDouble(element.getElementsByTagName("first_load").item(0).getTextContent());
 
-                    Reactor reactor = new Reactor(reactorName, reactorClass, burnup, electricalCapacity,
-                            enrichment, firstLoad, kpd, lifeTime,
-                            thermalCapacity, "XML");
-                    reactorStorage.addReactor(reactorName, reactor);
+                        Reactor reactor = new Reactor(reactorName, reactorClass, burnup, electricalCapacity,
+                                enrichment, firstLoad, kpd, lifeTime,
+                                thermalCapacity, "XML");
+                        reactorStorage.addReactor(reactorName, reactor);
+                    }
                 }
-            }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
+
     }
+
 }
