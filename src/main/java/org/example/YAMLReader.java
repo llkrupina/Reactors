@@ -6,9 +6,14 @@ import java.io.IOException;
 import java.util.Map;
 
 public class YAMLReader extends org.example.FileReader {
+    @Override
+    public boolean isFileFormatSupported(String filePath) {
+        return filePath.endsWith(".yaml");
+    }
 
+    @Override
     public void readFile(String filePath, ReactorStorage reactorStorage) {
-        if (filePath.endsWith(".yaml")) {
+
             Yaml yaml = new Yaml();
             try (FileReader reader = new FileReader(filePath)) {
                 Map<String, Map<String, Object>> yamlData = yaml.load(reader);
@@ -30,11 +35,7 @@ public class YAMLReader extends org.example.FileReader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (next != null) {
-            next.readFile(filePath, reactorStorage);
-        } else {
-            System.out.println("Формат файла не подходит");
-        }
+
     }
 
     private Reactor parseData(Map<String, Object> reactorData, String reactorName) {

@@ -21,7 +21,7 @@ import java.util.Map;
         }
 
         public void readFile(File file) {
-            jsonReader.readFile(file.getAbsolutePath(), reactorStorage);
+            jsonReader.CheckAndReadFile(file.getAbsolutePath(), reactorStorage);
         }
 
         public Map<String, Reactor> getReactorMap() {

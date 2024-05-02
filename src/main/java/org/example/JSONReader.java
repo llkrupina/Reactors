@@ -9,9 +9,14 @@ import java.util.NoSuchElementException;
 
 public class JSONReader extends org.example.FileReader {
 
+    @Override
+    public boolean isFileFormatSupported(String filePath) {
+        return filePath.endsWith(".json");
+    }
+
+    @Override
     public void readFile(String filePath, ReactorStorage reactorStorage) {
 
-        if (filePath.endsWith(".json")) {
             JSONParser parser = new JSONParser();
 
             try (FileReader reader = new FileReader(filePath)) {
@@ -35,11 +40,6 @@ public class JSONReader extends org.example.FileReader {
             } catch (NoSuchElementException e) {
                 System.out.println("Ошибка при обращении к элементу коллекции: " + e.getMessage());
             }
-        } else if (next != null) {
-            next.readFile(filePath, reactorStorage);
-        } else {
-            System.out.println("Формат файла не подходит");
-        }
     }
 
     private Reactor parseData(JSONObject reactorData, String reactorName){
